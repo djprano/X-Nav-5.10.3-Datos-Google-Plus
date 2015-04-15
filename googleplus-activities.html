@@ -45,8 +45,10 @@
           var li = document.createElement('LI');
           var t = document.createTextNode(activities[activity].title);
           li.appendChild(t);
-          console.log(li);
           document.getElementById('result').appendChild(li);
+          if(activities[activity].location){
+            console.log(activities[activity].location);
+          }
         }
       }
 
@@ -64,10 +66,6 @@
             heading.appendChild(document.createTextNode(resp.displayName));
 
             document.getElementById('content').appendChild(heading);
-            // var li = document.createElement('LI');
-            // var t = document.createTextNode('hola');
-            // li.appendChild(t);
-            // document.getElementById('content').appendChild(li);
           });
         });
 
