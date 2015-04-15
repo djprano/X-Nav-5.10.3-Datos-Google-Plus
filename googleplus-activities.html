@@ -39,13 +39,36 @@
         makeApiCall();
       }
 
+      function handleActivities(activities, postUrl, queryCount, nextPageToken){
+        for (var activity in activities){
+          activity = activities[activity];
+          if (activity['url'] == postUrl){
+            targetActivity = activity;
+            document.getElementById('result').value = 'ID is: ' +
+            activity.id + '\n' +
+            'PlusCount is: ' + activity.object.plusoners.totalItems + '\n' +
+            'Replies are: ' + activity.object.replies.totalItems + '\n' +
+            'Reshares are: ' + activity.object.resharers.totalItems + '\n';
+            isFound = true;
+          }else{
+            console.log(activity);
+          }
+        }
+
+        if (queryCount < maxQueryCount && !isFound){
+          queryCount++;
+
+          // throttle calls using timer to avoid reaching query limit
+          console.log('retrying with ' + nextPageToken);
+          setTimeout(searchForUrl(postUrl, queryCount, nextPageToken), 100);
+        }
+      }
+
       // Load the API and make an API call.  Display the results on the screen.
       function makeApiCall() {
         gapi.client.load('plus', 'v1', function() {
           var request = gapi.client.plus.people.get({
             'userId': '108086881826934773478'
-            // For instance: 
-            // 'userId': '+GregorioRobles'
           });
           request.execute(function(resp) {
             var heading = document.createElement('h4');
@@ -61,10 +84,19 @@
             document.getElementById('content').appendChild(li);
           });
         });
-      }
+
+        gapi.client.load('plus', 'v1', function() {
+          var request = gapi.client.plus.activities.list({
+            'userId': '108086881826934773478'
+          });
+          request.execute(function(resp){
+            handleActivities(resp.items, searchUrl, queryCount, resp.nextPageToken);
+          });
+        }
     </script>
     <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
     <div id="content"></div>
+    <div id="result"></div>
     <p>Retrieves your profile name (and picture) using the Google Plus API.</p>
   </body>
 </html>
