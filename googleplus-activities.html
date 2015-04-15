@@ -92,7 +92,7 @@
           request.execute(function(resp){
             handleActivities(resp.items, searchUrl, queryCount, resp.nextPageToken);
           });
-        }
+        });
       }
     </script>
     <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
