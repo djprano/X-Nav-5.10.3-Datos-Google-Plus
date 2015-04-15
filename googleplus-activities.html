@@ -46,10 +46,10 @@
           var t = document.createTextNode(activities[activity].title);
           li.appendChild(t);
           if(activities[activity].location){
-            li.appendChild('Position = Latitude: '
+            li.appendChild(document.createTextNode('Position = Latitude: '
             +activities[activity].location.position.latitude
             +' Longitude: '
-            +activities[activity].location.position.latitude);
+            +activities[activity].location.position.latitude));
           }
           document.getElementById('result').appendChild(li);
         }
