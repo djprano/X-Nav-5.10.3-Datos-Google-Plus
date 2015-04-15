@@ -41,11 +41,12 @@
 
       function handleActivities(activities){
         for (var activity in activities){
-          console.log(activities[activity]);
+          //console.log(activities[activity]);
           var li = document.createElement('LI');
           var t = document.createTextNode(activities[activity].title);
           li.appendChild(t);
-          document.getElementById('content').appendChild(li);
+          console.log(li);
+          document.getElementById('result').appendChild(li);
         }
       }
 
