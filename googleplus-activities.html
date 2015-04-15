@@ -45,10 +45,13 @@
           var li = document.createElement('LI');
           var t = document.createTextNode(activities[activity].title);
           li.appendChild(t);
-          document.getElementById('result').appendChild(li);
           if(activities[activity].location){
-            console.log(activities[activity].location);
+            li.appendChild('Position = Latitude: '
+            +activities[activity].location.position.latitude)
+            +' Longitude: '
+            +activities[activity].location.position.latitude);
           }
+          document.getElementById('result').appendChild(li);
         }
       }
 
