@@ -55,6 +55,9 @@
             heading.appendChild(document.createTextNode(resp.displayName));
 
             document.getElementById('content').appendChild(heading);
+            var li = document.createElement('li');
+            li.text('hola');
+            document.getElementById('content').appendChild(li);
           });
         });
       }
