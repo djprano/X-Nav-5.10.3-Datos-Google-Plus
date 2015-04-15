@@ -39,28 +39,9 @@
         makeApiCall();
       }
 
-      function handleActivities(activities, postUrl, queryCount, nextPageToken){
+      function handleActivities(activities){
         for (var activity in activities){
-          activity = activities[activity];
-          if (activity['url'] == postUrl){
-            targetActivity = activity;
-            document.getElementById('result').value = 'ID is: ' +
-            activity.id + '\n' +
-            'PlusCount is: ' + activity.object.plusoners.totalItems + '\n' +
-            'Replies are: ' + activity.object.replies.totalItems + '\n' +
-            'Reshares are: ' + activity.object.resharers.totalItems + '\n';
-            isFound = true;
-          }else{
-            console.log(activity);
-          }
-        }
-
-        if (queryCount < maxQueryCount && !isFound){
-          queryCount++;
-
-          // throttle calls using timer to avoid reaching query limit
-          console.log('retrying with ' + nextPageToken);
-          setTimeout(searchForUrl(postUrl, queryCount, nextPageToken), 100);
+          console.log(activity);
         }
       }
 
@@ -91,7 +72,7 @@
             'collection': 'public'
           });
           request.execute(function(resp){
-            handleActivities(resp.items, searchUrl, queryCount, resp.nextPageToken);
+            handleActivities(resp.items);
           });
         });
       }
