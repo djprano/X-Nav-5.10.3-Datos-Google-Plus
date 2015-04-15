@@ -66,24 +66,24 @@
 
       // Load the API and make an API call.  Display the results on the screen.
       function makeApiCall() {
-        gapi.client.load('plus', 'v1', function() {
-          var request = gapi.client.plus.people.get({
-            'userId': '108086881826934773478'
-          });
-          request.execute(function(resp) {
-            var heading = document.createElement('h4');
-            var image = document.createElement('img');
-            image.src = resp.image.url;
-            heading.appendChild(image);
-            heading.appendChild(document.createTextNode(resp.displayName));
+        // gapi.client.load('plus', 'v1', function() {
+        //   var request = gapi.client.plus.people.get({
+        //     'userId': '108086881826934773478'
+        //   });
+        //   request.execute(function(resp) {
+        //     var heading = document.createElement('h4');
+        //     var image = document.createElement('img');
+        //     image.src = resp.image.url;
+        //     heading.appendChild(image);
+        //     heading.appendChild(document.createTextNode(resp.displayName));
 
-            document.getElementById('content').appendChild(heading);
-            var li = document.createElement('LI');
-            var t = document.createTextNode('hola');
-            li.appendChild(t);
-            document.getElementById('content').appendChild(li);
-          });
-        });
+        //     document.getElementById('content').appendChild(heading);
+        //     // var li = document.createElement('LI');
+        //     // var t = document.createTextNode('hola');
+        //     // li.appendChild(t);
+        //     // document.getElementById('content').appendChild(li);
+        //   });
+        // });
 
         gapi.client.load('plus', 'v1', function() {
           var request = gapi.client.plus.activities.list({
